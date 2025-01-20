@@ -21,16 +21,30 @@ public class BookServiceImplementation implements BookService{
 
     @Override
     public void deleteBook(int id) throws BookNotFoundException {
-        bookRepo.deleteBook(id);
+        try {
+            bookRepo.deleteBook(id);
+        } catch (BookNotFoundException e) {
+            System.out.println("Book Not found");
+        }
     }
 
     @Override
     public void updateBook(int id, Book book) throws BookNotFoundException {
-        bookRepo.updateBook(id, book);
+        try {
+            bookRepo.updateBook(id, book);
+        } catch (BookNotFoundException e) {
+            System.out.println("Book Not found");
+
+        }
     }
 
     @Override
     public Book getBookById(int id) throws BookNotFoundException {
-        return bookRepo.getBookById(id);
+        try {
+            return bookRepo.getBookById(id);
+        } catch (BookNotFoundException e) {
+            System.out.println("Book Not found");
+        }
+        return null;
     }
 }

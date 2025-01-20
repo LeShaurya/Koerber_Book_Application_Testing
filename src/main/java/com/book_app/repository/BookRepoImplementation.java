@@ -36,12 +36,27 @@ public class BookRepoImplementation implements BookRepo{
     @Override
     public Book addBook(Book book) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO books(isbn, title, author, price) VALUES(?, ?, ?, ?)");
+            String query = "INSERT INTO books(isbn, title, author, price) VALUES(?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, book.getIsbn());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(3, book.getAuthor());
+            preparedStatement.setDouble(4, book.getPrice());
+
+            int result = preparedStatement.executeUpdate();
+
+            if (result == 0) {
+                System.out.println("Failed to add book.");
+            } else {
+                System.out.println("Book added successfully.");
+            }
         } catch (SQLException e) {
-            System.out.println("database error.");
+            System.out.println("Database error: " + e.getMessage());
         }
         return book;
     }
+
 
     @Override
     public void deleteBook(int id) throws BookNotFoundException {
