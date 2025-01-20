@@ -1,4 +1,4 @@
-package com.book_app.entity;
+package com.book_app.entities;
 
 public class Book {
     private int id;
@@ -6,6 +6,14 @@ public class Book {
     private String title;
     private String author;
     private double price;
+
+    public Book(int id, String isbn, String title, String author, double price) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
 
     public Book(String isbn, String title, String author, double price) {
         this.isbn = isbn;
