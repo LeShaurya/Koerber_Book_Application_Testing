@@ -24,7 +24,7 @@ public class BookServiceImplementation implements BookService{
         try {
             bookRepo.deleteBook(id);
         } catch (BookNotFoundException e) {
-            System.out.println("Book Not found");
+            throw new BookNotFoundException("Book Not found");
         }
     }
 
@@ -33,8 +33,7 @@ public class BookServiceImplementation implements BookService{
         try {
             bookRepo.updateBook(id, book);
         } catch (BookNotFoundException e) {
-            System.out.println("Book Not found");
-
+            throw new BookNotFoundException("Book Not found");
         }
     }
 
@@ -43,8 +42,7 @@ public class BookServiceImplementation implements BookService{
         try {
             return bookRepo.getBookById(id);
         } catch (BookNotFoundException e) {
-            System.out.println("Book Not found");
+            throw new BookNotFoundException("Book Not found");
         }
-        return null;
     }
 }
