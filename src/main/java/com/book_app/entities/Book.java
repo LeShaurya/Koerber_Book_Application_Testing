@@ -1,5 +1,7 @@
 package com.book_app.entities;
 
+import java.util.Objects;
+
 public class Book {
     private int id;
     private String isbn;
@@ -72,5 +74,17 @@ public class Book {
         sb.append(", price=").append(price);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id && Double.compare(price, book.price) == 0 && Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title) && Objects.equals(author, book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, isbn, title, author, price);
     }
 }

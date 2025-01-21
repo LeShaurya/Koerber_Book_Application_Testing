@@ -59,20 +59,22 @@ public class BookRepoImplementation implements BookRepo{
 
 
     @Override
-    public void deleteBook(int id) throws BookNotFoundException {
+    public boolean deleteBook(int id) throws BookNotFoundException {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM books WHERE id = ?");
             preparedStatement.setInt(1, id);
             int updates = preparedStatement.executeUpdate();
             if(updates == 0)
                 throw new BookNotFoundException("Book with id " + id + " not found");
+            return true;
         } catch (SQLException e) {
             System.out.println("database error.");
         }
+        return false;
     }
 
     @Override
-    public void updateBook(int id, Book book) throws BookNotFoundException {
+    public boolean updateBook(int id, Book book) throws BookNotFoundException {
         try {
             String query = "UPDATE books SET isbn = ?, title = ?, author = ?, price = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -87,9 +89,11 @@ public class BookRepoImplementation implements BookRepo{
             if (updates == 0) {
                 throw new BookNotFoundException("Book with id " + id + " not found.");
             }
+            return true;
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
+        return false;
     }
 
 

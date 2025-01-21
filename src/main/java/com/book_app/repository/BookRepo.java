@@ -8,7 +8,7 @@ import java.util.List;
 public interface BookRepo {
         List<Book> getAllBooks();
         Book addBook(Book book);
-        void deleteBook(int id) throws BookNotFoundException;
-        void updateBook(int id, Book book) throws BookNotFoundException;
+        boolean deleteBook(int id) throws BookNotFoundException;
+        boolean updateBook(int id, Book book) throws BookNotFoundException;
         Book getBookById(int id) throws BookNotFoundException;
 }

@@ -20,18 +20,18 @@ public class BookServiceImplementation implements BookService{
     }
 
     @Override
-    public void deleteBook(int id) throws BookNotFoundException {
+    public boolean deleteBook(int id) throws BookNotFoundException {
         try {
-            bookRepo.deleteBook(id);
+            return bookRepo.deleteBook(id);
         } catch (BookNotFoundException e) {
             throw new BookNotFoundException("Book Not found");
         }
     }
 
     @Override
-    public void updateBook(int id, Book book) throws BookNotFoundException {
+    public boolean updateBook(int id, Book book) throws BookNotFoundException {
         try {
-            bookRepo.updateBook(id, book);
+            return bookRepo.updateBook(id, book);
         } catch (BookNotFoundException e) {
             throw new BookNotFoundException("Book Not found");
         }
